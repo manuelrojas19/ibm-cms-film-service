@@ -14,7 +14,8 @@ keycloak:
   ssl-required: external
   resource: film-service
   credentials:
-    secret: JDfbmNcNBWEyV8ZoGwBrTUZ10WKHszYa
+    secret: c4Pu86FBf3YpS5V2z3SNVVZtmyvqqSUU
   use-resource-role-mappings: true
   autodetect-bearer-only: true
+  principal-attribute: preferred_username
 

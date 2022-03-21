@@ -14,7 +14,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
@@ -26,32 +25,35 @@ public class FilmController {
     private final FilmAssembler filmAssembler;
     private final FilmMapper filmMapper;
 
-    @RolesAllowed("SUBSCRIBER")
+    @PreAuthorize("permitAll()")
     @GetMapping
     public ResponseEntity<CollectionModel<FilmDto>> findAll() {
         List<Film> films = filmService.findAll();
         return new ResponseEntity<>(filmAssembler.toCollectionModel(films), HttpStatus.OK);
     }
 
-    @RolesAllowed("ADMIN")
+    @PreAuthorize("permitAll()")
     @GetMapping("/{id}")
     public ResponseEntity<FilmDto> findById(@PathVariable ObjectId id) {
         Film film = filmService.findById(id);
         return new ResponseEntity<>(filmAssembler.toModel(film), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<FilmDto> create(@Validated @RequestBody FilmDto filmDto) {
         Film film = filmService.create(filmMapper.toEntity(filmDto));
         return new ResponseEntity<>(filmAssembler.toModel(film), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<FilmDto> update(@PathVariable ObjectId id, @Validated @RequestBody FilmDto filmDto) {
         Film film = filmService.update(id, filmMapper.toEntity(filmDto));
         return new ResponseEntity<>(filmAssembler.toModel(film), HttpStatus.ACCEPTED);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable ObjectId id) {
         filmService.delete(id);
