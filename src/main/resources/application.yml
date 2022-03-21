@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: film-service
+  data:
+    mongodb:
+      database: cms_film_service_db
+      port: 27017
+      auto-index-creation: true
+server:
+  port: 8201
+keycloak:
+  realm: dev
+  auth-server-url: http://localhost:8180
+  ssl-required: external
+  resource: film-service
+  credentials:
+    secret: JDfbmNcNBWEyV8ZoGwBrTUZ10WKHszYa
+  use-resource-role-mappings: true
+  autodetect-bearer-only: true
+
