@@ -1,6 +1,7 @@
 package com.ibm.academy.cms.filmservice.assembler;
 
 import com.google.common.collect.Streams;
+import com.ibm.academy.cms.filmservice.controller.ActorController;
 import com.ibm.academy.cms.filmservice.controller.FilmController;
 import com.ibm.academy.cms.filmservice.dto.ActorDto;
 import com.ibm.academy.cms.filmservice.dto.FilmDto;
@@ -25,7 +26,9 @@ public class ActorAssembler implements RepresentationModelAssembler<Actor, Actor
     @Override
     public ActorDto toModel(Actor entity) {
         ActorDto dto = personMapper.toDto(entity);
-        // TODO: add links
+        dto.add(linkTo(methodOn(ActorController.class).findById(entity.getId())).withSelfRel().expand());
+        dto.add(linkTo(methodOn(ActorController.class).update(entity.getId(), null)).withRel("update").expand());
+        dto.add(linkTo(methodOn(ActorController.class).delete(entity.getId())).withRel("delete").expand());
         return dto;
     }
 
@@ -33,7 +36,8 @@ public class ActorAssembler implements RepresentationModelAssembler<Actor, Actor
     public CollectionModel<ActorDto> toCollectionModel(Iterable<? extends Actor> entities) {
         CollectionModel<ActorDto> dtos = CollectionModel.of(Streams.stream(entities)
                 .map(this::toModel).collect(Collectors.toList()));
-        // TODO: add links
+        dtos.add(linkTo(methodOn(ActorController.class).findAll()).withSelfRel().expand());
+        dtos.add(linkTo(methodOn(ActorController.class).create(null)).withRel("create").expand());
         return dtos;
     }
 }
