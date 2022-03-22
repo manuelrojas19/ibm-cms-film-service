@@ -3,11 +3,13 @@ package com.ibm.academy.cms.filmservice.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -30,4 +32,6 @@ public class Film extends BaseEntity {
     private List<Director> directors;
 
     private List<Actor> actors;
+
+    private Set<Category> categories;
 }

@@ -2,6 +2,7 @@ package com.ibm.academy.cms.filmservice.entity;
 
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Document(collection = "actors")
 public class Actor extends Person {
 
+    @DocumentReference
     private List<Film> films;
 
 }
