@@ -2,9 +2,7 @@ package com.ibm.academy.cms.filmservice.assembler;
 
 import com.google.common.collect.Streams;
 import com.ibm.academy.cms.filmservice.controller.ActorController;
-import com.ibm.academy.cms.filmservice.controller.FilmController;
 import com.ibm.academy.cms.filmservice.dto.ActorDto;
-import com.ibm.academy.cms.filmservice.dto.FilmDto;
 import com.ibm.academy.cms.filmservice.entity.Actor;
 import com.ibm.academy.cms.filmservice.mapper.PersonMapper;
 import lombok.AllArgsConstructor;
