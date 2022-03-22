@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Document
+@Document(collection = "films")
 public class Film extends BaseEntity {
 
     @NotBlank
