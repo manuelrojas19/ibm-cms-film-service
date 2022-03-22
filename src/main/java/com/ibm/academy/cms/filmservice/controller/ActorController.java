@@ -6,6 +6,7 @@ import com.ibm.academy.cms.filmservice.entity.Actor;
 import com.ibm.academy.cms.filmservice.mapper.PersonMapper;
 import com.ibm.academy.cms.filmservice.service.ActorService;
 import lombok.AllArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,11 +35,32 @@ public class ActorController {
         return new ResponseEntity<>(actorAssembler.toCollectionModel(actors), HttpStatus.OK);
     }
 
+    @PreAuthorize("permitAll()")
+    @GetMapping("/{id}")
+    public ResponseEntity<ActorDto> findById(@PathVariable ObjectId id) {
+        Actor actor = (Actor) actorService.findById(id);
+        return new ResponseEntity<>(actorAssembler.toModel(actor), HttpStatus.OK);
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<ActorDto> create(@Validated @RequestBody ActorDto actorDto) {
         Actor actor = (Actor) actorService.create(personMapper.toEntity(actorDto));
         return new ResponseEntity<>(actorAssembler.toModel(actor), HttpStatus.CREATED);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/{id}")
+    public ResponseEntity<ActorDto> update(@PathVariable ObjectId id, @Validated @RequestBody ActorDto actorDto) {
+        Actor actor = (Actor) actorService.update(id, personMapper.toEntity(actorDto));
+        return new ResponseEntity<>(actorAssembler.toModel(actor), HttpStatus.ACCEPTED);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable ObjectId id) {
+        actorService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }
