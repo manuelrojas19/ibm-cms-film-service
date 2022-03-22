@@ -17,7 +17,7 @@ public class FilmServiceImpl extends GenericServiceImpl<Film, FilmRepository> im
 
     @Override
     public Film update(ObjectId id, Film film) {
-        Film filmToUpdate = repository.findById(id).orElseThrow(() -> new RuntimeException("Not Founded"));
+        Film filmToUpdate = this.findById(id);
         filmToUpdate.setTitle(film.getTitle());
         filmToUpdate.setDescription(film.getDescription());
         filmToUpdate.setDate(film.getDate());
