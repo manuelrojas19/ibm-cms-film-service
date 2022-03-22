@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Getter
@@ -11,8 +12,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Document(collection = "actors")
-public class Actor extends Person {
+@Document
+public class Category extends BaseEntity {
+
+    @NotBlank
+    private String name;
+
+    @NotBlank
+    private String description;
 
     @DocumentReference
     private List<Film> films;

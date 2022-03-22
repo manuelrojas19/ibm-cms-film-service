@@ -11,10 +11,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Document(collection = "actors")
-public class Actor extends Person {
+@Document(collection = "directors")
+public class Director extends Person {
 
     @DocumentReference
-    private List<Film> films;
+    private List<Film> directedFilms;
 
 }
