@@ -1,6 +1,5 @@
 package com.ibm.academy.cms.filmservice.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.*;
