@@ -4,6 +4,7 @@ import com.ibm.academy.cms.filmservice.entity.Director;
 import com.ibm.academy.cms.filmservice.entity.Person;
 import com.ibm.academy.cms.filmservice.repository.PersonRepository;
 import com.ibm.academy.cms.filmservice.service.DirectorService;
+import com.ibm.academy.cms.filmservice.service.PersonService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
