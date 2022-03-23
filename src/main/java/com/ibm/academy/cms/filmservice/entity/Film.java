@@ -3,13 +3,10 @@ package com.ibm.academy.cms.filmservice.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -29,9 +26,9 @@ public class Film extends BaseEntity {
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
     private Date date;
 
-    private List<Director> directors;
+    private List<Director> directors = new ArrayList<>();
 
-    private List<Actor> actors;
+    private List<Actor> actors = new ArrayList<>();
 
-    private Set<Category> categories;
+    private List<Category> categories = new ArrayList<>();
 }
