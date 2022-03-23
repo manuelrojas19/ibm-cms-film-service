@@ -39,7 +39,8 @@ public class FilmController {
         return new ResponseEntity<>(filmAssembler.toModel(film), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("permitAll()")
     @PostMapping
     public ResponseEntity<FilmDto> create(@Validated @RequestBody FilmDto filmDto) {
         Film film = filmService.create(filmMapper.toEntity(filmDto));
@@ -50,6 +51,14 @@ public class FilmController {
     @PutMapping("/{id}")
     public ResponseEntity<FilmDto> update(@PathVariable ObjectId id, @Validated @RequestBody FilmDto filmDto) {
         Film film = filmService.update(id, filmMapper.toEntity(filmDto));
+        return new ResponseEntity<>(filmAssembler.toModel(film), HttpStatus.ACCEPTED);
+    }
+
+    //    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("permitAll()")
+    @PatchMapping("/{filmId}/add-actor/{actorId}")
+    public ResponseEntity<FilmDto> addActor(@PathVariable ObjectId filmId, @PathVariable ObjectId actorId) {
+        Film film = filmService.addActorToFilm(actorId, filmId);
         return new ResponseEntity<>(filmAssembler.toModel(film), HttpStatus.ACCEPTED);
     }
 

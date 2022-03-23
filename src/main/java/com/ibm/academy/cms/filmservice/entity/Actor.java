@@ -4,7 +4,10 @@ import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -15,6 +18,7 @@ import java.util.List;
 public class Actor extends Person {
 
     @DocumentReference
-    private List<Film> films;
+    private Set<Film> films = new HashSet<>();
+
 
 }

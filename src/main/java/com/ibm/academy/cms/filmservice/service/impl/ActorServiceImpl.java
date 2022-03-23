@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ActorServiceImpl extends PersonServiceImpl implements ActorService {
@@ -18,6 +19,7 @@ public class ActorServiceImpl extends PersonServiceImpl implements ActorService 
     }
 
     @Override
+    @Transactional
     public Person update(ObjectId id, Person actor) {
         Actor actorToUpdate = (Actor) this.findById(id);
         actorToUpdate.setName(actor.getName());

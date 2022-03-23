@@ -6,6 +6,7 @@ import com.ibm.academy.cms.filmservice.service.CategoryService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CategoryServiceImpl extends GenericServiceImpl<Category, CategoryRepository> implements CategoryService {
@@ -16,6 +17,7 @@ public class CategoryServiceImpl extends GenericServiceImpl<Category, CategoryRe
     }
 
     @Override
+    @Transactional
     public Category update(ObjectId id, Category category) {
         Category categoryToUpdate = this.findById(id);
         categoryToUpdate.setName(category.getName());

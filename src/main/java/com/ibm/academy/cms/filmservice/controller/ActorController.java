@@ -42,7 +42,8 @@ public class ActorController {
         return new ResponseEntity<>(actorAssembler.toModel(actor), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("permitAll()")
     @PostMapping
     public ResponseEntity<ActorDto> create(@Validated @RequestBody ActorDto actorDto) {
         Actor actor = (Actor) actorService.create(personMapper.toEntity(actorDto));

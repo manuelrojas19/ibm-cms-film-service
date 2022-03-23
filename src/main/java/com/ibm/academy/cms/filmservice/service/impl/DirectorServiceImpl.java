@@ -9,6 +9,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DirectorServiceImpl extends PersonServiceImpl implements DirectorService {
@@ -19,6 +20,7 @@ public class DirectorServiceImpl extends PersonServiceImpl implements DirectorSe
     }
 
     @Override
+    @Transactional
     public Person update(ObjectId id, Person director) {
         Director directorToUpdate = (Director) this.findById(id);
         directorToUpdate.setName(director.getName());
