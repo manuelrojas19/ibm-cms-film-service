@@ -1,20 +1,15 @@
 package com.ibm.academy.cms.filmservice.entity;
 
-import lombok.*;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
-
-import java.util.List;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.data.neo4j.core.schema.Node;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
-@Document(collection = "directors")
+@Node("director")
 public class Director extends Person {
-
-    @DocumentReference
-    private List<Film> directedFilms;
-
 }

@@ -1,24 +1,13 @@
 package com.ibm.academy.cms.filmservice.entity;
 
 import lombok.*;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import org.springframework.data.neo4j.core.schema.Node;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
-@Document(collection = "actors")
+@Node("actor")
 public class Actor extends Person {
-
-    @DocumentReference
-    private Set<Film> films = new HashSet<>();
-
 
 }

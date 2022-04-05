@@ -13,7 +13,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public abstract class Person extends BaseEntity {
+public abstract class Person extends AuditMetadata {
 
     @NotBlank
     private String name;
@@ -34,7 +34,7 @@ public abstract class Person extends BaseEntity {
         if (!(o instanceof Person)) return false;
         if (!super.equals(o)) return false;
         Person person = (Person) o;
-        return getName().equals(person.getName()) && getDescription().equals(person.getDescription()) && getBornDate().equals(person.getBornDate()) && getBornPlace().equals(person.getBornPlace());
+        return Objects.equals(getName(), person.getName()) && Objects.equals(getDescription(), person.getDescription()) && Objects.equals(getBornDate(), person.getBornDate()) && Objects.equals(getBornPlace(), person.getBornPlace());
     }
 
     @Override

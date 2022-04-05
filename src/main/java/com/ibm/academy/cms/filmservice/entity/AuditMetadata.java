@@ -1,8 +1,9 @@
 package com.ibm.academy.cms.filmservice.entity;
 
 import lombok.*;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.*;
+import org.springframework.data.neo4j.core.schema.GeneratedValue;
+import org.springframework.data.neo4j.core.schema.Id;
 
 import java.util.Date;
 import java.util.Objects;
@@ -12,10 +13,11 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public abstract class BaseEntity {
+public abstract class AuditMetadata {
 
     @Id
-    private ObjectId id;
+    @GeneratedValue
+    private Long id;
 
     @Version
     private Long version;
@@ -35,8 +37,8 @@ public abstract class BaseEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof BaseEntity)) return false;
-        BaseEntity that = (BaseEntity) o;
+        if (!(o instanceof AuditMetadata)) return false;
+        AuditMetadata that = (AuditMetadata) o;
         return Objects.equals(getId(), that.getId()) && Objects.equals(getVersion(), that.getVersion());
     }
 
