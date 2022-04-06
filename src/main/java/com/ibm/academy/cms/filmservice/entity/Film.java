@@ -8,10 +8,7 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Getter
 @Setter
@@ -32,10 +29,13 @@ public class Film extends AuditMetadata {
     private Date date;
 
     @Relationship(type = "ACTED_IN", direction = Relationship.Direction.INCOMING)
-    private List<Roles> actorsAndRoles = new ArrayList<>();
+    private Set<ActorRoleRelationship> actorsAndRoles = new HashSet<>();
 
     @Relationship(type = "DIRECTED", direction = Relationship.Direction.INCOMING)
-    private List<Director> directors = new ArrayList<>();
+    private Set<Director> directors = new HashSet<>();
+
+    @Relationship(type = "DIRECTED", direction = Relationship.Direction.INCOMING)
+    private Set<Category> categories = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

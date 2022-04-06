@@ -6,7 +6,7 @@ import com.ibm.academy.cms.filmservice.entity.Actor;
 import com.ibm.academy.cms.filmservice.mapper.PersonMapper;
 import com.ibm.academy.cms.filmservice.service.ActorService;
 import lombok.AllArgsConstructor;
-import org.bson.types.ObjectId;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +15,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/actors")
 @AllArgsConstructor
@@ -29,16 +29,15 @@ public class ActorController {
     @PreAuthorize("permitAll()")
     @GetMapping
     public ResponseEntity<CollectionModel<ActorDto>> findAll() {
-        List<Actor> actors = actorService.findAll()
-                .stream().map(person -> (Actor) person)
-                .collect(Collectors.toList());
+        List<Actor> actors = actorService.findAll();
+        log.info("Actors --> {}", actors);
         return new ResponseEntity<>(actorAssembler.toCollectionModel(actors), HttpStatus.OK);
     }
 
     @PreAuthorize("permitAll()")
     @GetMapping("/{id}")
-    public ResponseEntity<ActorDto> findById(@PathVariable ObjectId id) {
-        Actor actor = (Actor) actorService.findById(id);
+    public ResponseEntity<ActorDto> findById(@PathVariable Long id) {
+        Actor actor = actorService.findById(id);
         return new ResponseEntity<>(actorAssembler.toModel(actor), HttpStatus.OK);
     }
 
@@ -46,20 +45,20 @@ public class ActorController {
     @PreAuthorize("permitAll()")
     @PostMapping
     public ResponseEntity<ActorDto> create(@Validated @RequestBody ActorDto actorDto) {
-        Actor actor = (Actor) actorService.create(personMapper.toEntity(actorDto));
+        Actor actor = actorService.create(personMapper.toEntity(actorDto));
         return new ResponseEntity<>(actorAssembler.toModel(actor), HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<ActorDto> update(@PathVariable ObjectId id, @Validated @RequestBody ActorDto actorDto) {
-        Actor actor = (Actor) actorService.update(id, personMapper.toEntity(actorDto));
+    public ResponseEntity<ActorDto> update(@PathVariable Long id, @Validated @RequestBody ActorDto actorDto) {
+        Actor actor = actorService.update(id, personMapper.toEntity(actorDto));
         return new ResponseEntity<>(actorAssembler.toModel(actor), HttpStatus.ACCEPTED);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable ObjectId id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         actorService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

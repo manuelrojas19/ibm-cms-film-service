@@ -1,16 +1,18 @@
 package com.ibm.academy.cms.filmservice.dto;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.validation.constraints.Null;
 import java.util.Date;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class BaseEntityDto extends RepresentationModel<BaseEntityDto> {
 
     @Null
-    private String id;
+    private Long id;
 
     @Null
     private Long version;

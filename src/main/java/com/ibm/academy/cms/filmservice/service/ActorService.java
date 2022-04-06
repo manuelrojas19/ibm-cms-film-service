@@ -1,4 +1,6 @@
 package com.ibm.academy.cms.filmservice.service;
 
-public interface ActorService extends PersonService {
+import com.ibm.academy.cms.filmservice.entity.Actor;
+
+public interface ActorService extends GenericService<Actor> {
 }

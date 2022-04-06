@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @SuperBuilder
 @RelationshipProperties
-public class Roles {
+public class ActorRoleRelationship {
 
     @RelationshipId
     private Long id;

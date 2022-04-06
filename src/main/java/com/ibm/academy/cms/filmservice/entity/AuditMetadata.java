@@ -5,6 +5,7 @@ import org.springframework.data.annotation.*;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
@@ -13,7 +14,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public abstract class AuditMetadata {
+public abstract class AuditMetadata implements Serializable {
 
     @Id
     @GeneratedValue

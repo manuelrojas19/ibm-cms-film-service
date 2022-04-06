@@ -34,7 +34,7 @@ public class FilmAssembler implements RepresentationModelAssembler<Film, FilmDto
     public CollectionModel<FilmDto> toCollectionModel(Iterable<? extends Film> entities) {
         CollectionModel<FilmDto> dtos = CollectionModel.of(Streams.stream(entities)
                 .map(this::toModel).collect(Collectors.toList()));
-        dtos.add(linkTo(methodOn(FilmController.class).findAll()).withSelfRel().expand());
+        dtos.add(linkTo(methodOn(FilmController.class).findAll(null)).withSelfRel().expand());
         dtos.add(linkTo(methodOn(FilmController.class).create(null)).withRel("create").expand());
         return dtos;
     }

@@ -2,11 +2,11 @@ package com.ibm.academy.cms.filmservice.controller;
 
 import com.ibm.academy.cms.filmservice.assembler.CategoryAssembler;
 import com.ibm.academy.cms.filmservice.dto.CategoryDto;
+
 import com.ibm.academy.cms.filmservice.entity.Category;
 import com.ibm.academy.cms.filmservice.mapper.CategoryMapper;
 import com.ibm.academy.cms.filmservice.service.CategoryService;
 import lombok.AllArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,12 +34,12 @@ public class CategoryController {
 
     @PreAuthorize("permitAll()")
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryDto> findById(@PathVariable ObjectId id) {
+    public ResponseEntity<CategoryDto> findById(@PathVariable Long id) {
         Category category = categoryService.findById(id);
         return new ResponseEntity<>(categoryAssembler.toModel(category), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("permitAll()")
     @PostMapping
     public ResponseEntity<CategoryDto> create(@Validated @RequestBody CategoryDto categoryDto) {
         Category category = categoryService.create(categoryMapper.toEntity(categoryDto));
@@ -48,14 +48,14 @@ public class CategoryController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryDto> update(@PathVariable ObjectId id, @Validated @RequestBody CategoryDto categoryDto) {
+    public ResponseEntity<CategoryDto> update(@PathVariable Long id, @Validated @RequestBody CategoryDto categoryDto) {
         Category category = categoryService.update(id, categoryMapper.toEntity(categoryDto));
         return new ResponseEntity<>(categoryAssembler.toModel(category), HttpStatus.ACCEPTED);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable ObjectId id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         categoryService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

@@ -1,7 +1,6 @@
 package com.ibm.academy.cms.filmservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.ibm.academy.cms.filmservice.entity.BaseEntity;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;

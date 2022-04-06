@@ -3,14 +3,13 @@ package com.ibm.academy.cms.filmservice.service.impl;
 import com.ibm.academy.cms.filmservice.exception.NotFoundException;
 import com.ibm.academy.cms.filmservice.service.GenericService;
 import lombok.AllArgsConstructor;
-import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @AllArgsConstructor
-public abstract class GenericServiceImpl<E, R extends MongoRepository<E, ObjectId>> implements GenericService<E> {
+public abstract class GenericServiceImpl<E, R extends Neo4jRepository<E, Long>> implements GenericService<E> {
 
     public static final String NOT_FOUND_ERROR_MSG = "Resource was not found";
 
@@ -18,7 +17,7 @@ public abstract class GenericServiceImpl<E, R extends MongoRepository<E, ObjectI
 
     @Override
     @Transactional(readOnly = true)
-    public E findById(ObjectId id) {
+    public E findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException(NOT_FOUND_ERROR_MSG));
     }
@@ -37,11 +36,11 @@ public abstract class GenericServiceImpl<E, R extends MongoRepository<E, ObjectI
 
     @Override
     @Transactional
-    public abstract E update(ObjectId id, E entity);
+    public abstract E update(Long id, E entity);
 
     @Override
     @Transactional
-    public void delete(ObjectId id) {
+    public void delete(Long id) {
         repository.deleteById(id);
     }
 }

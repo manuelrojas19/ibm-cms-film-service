@@ -2,12 +2,17 @@ package com.ibm.academy.cms.filmservice.dto;
 
 import com.ibm.academy.cms.filmservice.entity.Film;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import net.minidev.json.annotate.JsonIgnore;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class ActorDto extends PersonDto {
+@EqualsAndHashCode(callSuper = true)
+public class ActorDto extends PersonDto implements Serializable {
 
-    private List<Film> films;
+    @JsonIgnore
+    private static final long serialVersionUID = 1690442391318535350L;
 
 }

@@ -18,7 +18,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Component
 @AllArgsConstructor
 public class CategoryAssembler implements RepresentationModelAssembler<Category, CategoryDto> {
-
+    
     private final CategoryMapper categoryMapper;
 
     @Override
